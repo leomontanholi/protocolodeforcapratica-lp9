@@ -100,9 +100,17 @@ button:focus-visible,
 
 .wrap--narrow { max-width: var(--max-narrow); }
 
+.section-heading {
+  max-width: 100%;
+}
+
+.section-heading .divider {
+  margin-bottom: 18px;
+}
+
 section {
   position: relative;
-  padding: 72px 0;
+  padding: 60px 0;
 }
 
 .section-first { border-top: none !important; padding-top: 0; }
@@ -157,16 +165,17 @@ section {
 }
 
 .section-title {
-  font-size: clamp(30px, 7vw, 56px);
+  font-size: clamp(28px, 10vw, 56px);
   text-wrap: balance;
+  line-height: 0.96;
 }
 
 .section-sub {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--muted);
   margin-top: 10px;
   max-width: 640px;
-  line-height: 1.65;
+  line-height: 1.6;
 }
 
 .body-p {
@@ -210,33 +219,52 @@ section {
   color: var(--text-dark);
 }
 
-.section-light .close__sub strong,
-.section-light .faq-a strong,
-.section-light .offer-card__product,
-.section-light .offer-price,
-.section-light .offer-cash,
-.section-light .offer-installments,
-.section-light .offer-or,
-.section-light .guarantee__title,
-.section-light .guarantee__text,
-.section-light .guarantee__text strong {
-  color: var(--text-dark);
+
+.section-light .offer-card {
+  background: linear-gradient(180deg, rgba(94,23,235,0.10), rgba(255,255,255,0.94));
+  border-color: rgba(94,23,235,0.18);
+  box-shadow: 0 14px 34px rgba(19,13,34,0.06), 0 10px 26px rgba(94,23,235,0.08);
 }
 
-.section-dark .offer-card__product,
-.section-soft-dark .offer-card__product,
-.section-dark .offer-price,
-.section-soft-dark .offer-price,
-.section-dark .offer-cash strong,
-.section-soft-dark .offer-cash strong,
-.section-dark .guarantee__title,
-.section-soft-dark .guarantee__title,
-.section-dark .faq-q,
-.section-soft-dark .faq-q,
-.section-dark .faq-a strong,
-.section-soft-dark .faq-a strong {
-  color: var(--white);
+.section-light .guarantee {
+  background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.84));
+  border-color: rgba(18,18,18,0.10);
+  box-shadow: 0 14px 34px rgba(19,13,34,0.06);
 }
+
+.section-light .offer-card__product,
+.section-light .offer-price,
+.section-light .offer-stack__total,
+.section-light .guarantee__title,
+.section-light .faq-q,
+.section-light .faq-a strong,
+.section-light .guarantee__text strong {
+  color: var(--text-dark) !important;
+}
+
+.section-light .offer-card__includes,
+.section-light .offer-stack li,
+.section-light .offer-installments,
+.section-light .offer-or,
+.section-light .offer-cash,
+.section-light .offer-badge,
+.section-light .price-anchor,
+.section-light .guarantee__text,
+.section-light .faq-a {
+  color: var(--muted-dark);
+}
+
+.section-light .offer-stack li,
+.section-light .guarantee,
+.section-light .faq-item {
+  border-color: var(--border-dark);
+}
+
+.section-light .offer-badge::before,
+.section-light .faq-q span {
+  color: var(--purple);
+}
+
 
 .btn {
   display: inline-flex;
@@ -477,10 +505,10 @@ section {
 .testimonials-track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(280px, 86%);
-  gap: 14px;
+  grid-auto-columns: minmax(258px, 84%);
+  gap: 12px;
   overflow-x: auto;
-  padding-bottom: 6px;
+  padding: 2px 2px 8px;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
 }
@@ -491,20 +519,25 @@ section {
   border-radius: 999px;
 }
 
+.testimonials-track::after {
+  content: '';
+  width: 2px;
+}
+
 .testimonial {
   scroll-snap-align: start;
   background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.80));
   border: 1px solid rgba(18,18,18,0.10);
-  border-radius: var(--r);
-  box-shadow: 0 14px 34px rgba(19,13,34,0.06);
-  padding: 22px 18px;
+  border-radius: 14px;
+  box-shadow: 0 12px 28px rgba(19,13,34,0.06);
+  padding: 18px 16px;
   min-height: 100%;
 }
 
 .testimonial__text {
-  font-size: 15px;
-  line-height: 1.65;
-  margin-bottom: 14px;
+  font-size: 14px;
+  line-height: 1.58;
+  margin-bottom: 12px;
 }
 
 .testimonial__author {
@@ -545,7 +578,7 @@ section {
   background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
   border: 1px solid var(--border);
   border-radius: var(--r);
-  padding: 24px 20px;
+  padding: 20px 16px;
   box-shadow: var(--shadow-sm);
 }
 
@@ -570,11 +603,11 @@ section {
 
 .forwho-list li {
   position: relative;
-  padding: 11px 0 11px 20px;
+  padding: 11px 0 11px 18px;
   border-bottom: 1px solid var(--border);
-  font-size: 15px;
+  font-size: 14px;
   color: var(--muted);
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 .forwho-list li:last-child { border-bottom: none; }
@@ -609,7 +642,7 @@ section {
   border: 1px solid rgba(18,18,18,0.10);
   border-radius: var(--r);
   box-shadow: 0 14px 34px rgba(19,13,34,0.06);
-  padding: 24px 20px;
+  padding: 20px 16px;
 }
 
 .foundation-card__n {
@@ -681,9 +714,9 @@ section {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 22px 20px;
-  border-radius: 18px;
+  gap: 12px;
+  padding: 18px 16px;
+  border-radius: 16px;
   border: 1px solid rgba(255,255,255,0.09);
   background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03));
   box-shadow: var(--shadow-sm);
@@ -732,7 +765,7 @@ section {
 .lesson-card__title {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 800;
-  font-size: 25px;
+  font-size: 22px;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   line-height: 1.02;
@@ -740,20 +773,17 @@ section {
 
 .lesson-card__learn,
 .lesson-card__shift {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--muted);
-  line-height: 1.62;
+  line-height: 1.58;
 }
 
 .lesson-card__shift strong,
 .offer-cash strong,
 .guarantee__text strong,
+.close__sub strong,
 .faq-a strong {
   color: var(--white);
-}
-
-.close__sub strong {
-  color: inherit;
 }
 
 .lesson-card__shift {
@@ -772,6 +802,10 @@ section {
 }
 
 .section-light .lesson-card__shift strong { color: var(--purple); }
+
+.section-light .story-quote p { color: var(--text-dark); }
+.section-light .story-quote .attr { color: var(--purple); }
+.section-dark .close__final { color: var(--dim); }
 
 /* Bonuses */
 .bonus-grid {
@@ -793,19 +827,29 @@ section {
 
 .bonus-card__media {
   position: relative;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 16 / 6;
   overflow: hidden;
   background: #0a0a10;
+}
+
+.bonus-card__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.08) 100%);
+  pointer-events: none;
 }
 
 .bonus-card__media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
+  transform: scale(1.10);
 }
 
 .bonus-card__content {
-  padding: 20px 18px 22px;
+  padding: 18px 16px 20px;
 }
 
 .bonus-card__lbl {
@@ -821,7 +865,7 @@ section {
 .bonus-card__title {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 800;
-  font-size: 24px;
+  font-size: 22px;
   text-transform: uppercase;
   letter-spacing: 0.03em;
   margin-bottom: 8px;
@@ -829,8 +873,8 @@ section {
 }
 
 .bonus-card__desc {
-  font-size: 16px;
-  line-height: 1.62;
+  font-size: 14px;
+  line-height: 1.56;
 }
 
 .bonus-card__val {
@@ -851,28 +895,10 @@ section {
   margin: 0 auto;
 }
 
-.offer-urgency {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin: 0 auto 16px;
-  padding: 10px 14px;
-  border-radius: 999px;
-  background: rgba(94,23,235,0.10);
-  border: 1px solid rgba(94,23,235,0.22);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--purple-soft);
-}
-
 .offer-card {
   position: relative;
   overflow: hidden;
-  padding: 30px 22px 34px;
+  padding: 26px 18px 28px;
   background: linear-gradient(180deg, rgba(94,23,235,0.11), rgba(255,255,255,0.035));
   border: 1px solid rgba(94,23,235,0.26);
   border-radius: 18px;
@@ -948,9 +974,9 @@ section {
 .offer-price {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 900;
-  font-size: 68px;
+  font-size: 60px;
   color: var(--white);
-  line-height: 1;
+  line-height: 0.95;
 }
 
 .offer-price__cur {
@@ -1071,15 +1097,15 @@ section {
 
 .close__hl {
   font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(30px, 8.5vw, 66px);
-  line-height: 1;
-  margin-bottom: 20px;
+  font-size: clamp(28px, 10vw, 66px);
+  line-height: 0.98;
+  margin-bottom: 18px;
   text-wrap: balance;
 }
 
 .close__hl em {
   font-style: normal;
-  color: var(--purple-soft);
+  color: inherit;
 }
 
 .close__sub {
@@ -1090,6 +1116,10 @@ section {
   max-width: 440px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.close__sub-plain {
+  color: inherit;
 }
 
 .close__cta {
@@ -1110,24 +1140,92 @@ section {
 /* Footer */
 footer {
   padding: 24px var(--pad);
-  background: #ffffff;
-  border-top: 1px solid rgba(18,18,18,0.10);
+  background: #06060c;
+  border-top: 1px solid rgba(255,255,255,0.08);
   text-align: center;
   font-size: 14px;
-  color: #111111;
+  color: #ffffff;
   line-height: 1.8;
 }
 
-footer a { color: #111111; text-underline-offset: 3px; }
+footer a { color: #ffffff; text-underline-offset: 3px; }
+
+@media (max-width: 639px) {
+  :root { --pad: 18px; }
+
+  section { padding: 62px 0; }
+
+  .hero { padding-top: 24px; }
+
+  .section-title {
+    font-size: clamp(26px, 9vw, 38px);
+    line-height: 0.98;
+  }
+
+  .section-sub,
+  .body-p,
+  .testimonial__text,
+  .lesson-card__learn,
+  .lesson-card__shift,
+  .bonus-card__desc,
+  .faq-a {
+    font-size: 14px;
+  }
+
+  .testimonial,
+  .forwho-col,
+  .foundation-card,
+  .lesson-card,
+  .bonus-card,
+  .offer-card,
+  .guarantee,
+  .story-quote {
+    border-radius: 16px;
+  }
+
+  .testimonials-track {
+    grid-auto-columns: minmax(246px, 84%);
+    gap: 10px;
+    padding-bottom: 6px;
+  }
+
+  .bonus-card__media {
+    aspect-ratio: 16 / 6;
+  }
+
+  .bonus-card__media img {
+    transform: scale(1.12);
+  }
+
+  .bonus-card__content {
+    padding: 16px 14px 18px;
+  }
+
+  .offer-card {
+    padding: 24px 16px 26px;
+  }
+
+  .offer-price {
+    font-size: 60px;
+  }
+
+  .offer-price__cur {
+    font-size: 26px;
+  }
+
+  .offer-price__dec {
+    font-size: 38px;
+  }
+}
 
 @media (min-width: 640px) {
-  :root { --pad: 34px; }
+  :root { --pad: 28px; }
 
   body { font-size: 17px; }
-  section { padding: 88px 0; }
+  section { padding: 80px 0; }
   .hero { padding-top: 31px; }
   .hero__cta { max-width: 360px; padding-bottom: 54px; }
-  .hero__sub { font-size: 18px; max-width: 600px; }
+  .hero__sub { font-size: 17px; max-width: 560px; }
 
   .hero__brand-mark { margin-bottom: 18px; }
   .hero__brand-mark img { width: clamp(96px, 11vw, 132px); }
@@ -1146,11 +1244,11 @@ footer a { color: #111111; text-underline-offset: 3px; }
     content: " ";
   }
 
-  .foundation-grid { grid-template-columns: repeat(3, 1fr); }
-  .forwho-grid { grid-template-columns: 1.15fr .85fr; }
-  .story-layout { grid-template-columns: 1fr 1fr; gap: 52px; }
-  .lessons-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .bonus-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .foundation-grid { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .forwho-grid { grid-template-columns: 1fr; gap: 14px; }
+  .story-layout { grid-template-columns: 1fr; gap: 26px; }
+  .lessons-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .bonus-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
   .testimonials-track {
     grid-auto-flow: unset;
     grid-auto-columns: unset;
@@ -1167,9 +1265,11 @@ footer a { color: #111111; text-underline-offset: 3px; }
 }
 
 @media (min-width: 980px) {
-  :root { --pad: 44px; }
+  :root { --pad: 38px; }
 
   .lessons-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .story-layout { grid-template-columns: 1.1fr .9fr; gap: 42px; }
+  .forwho-grid { grid-template-columns: 1.15fr .85fr; }
 }
 
 @media (min-width: 1180px) {
@@ -1194,7 +1294,7 @@ fbq('track', 'PageView');
 <!-- End Meta Pixel Code -->
 </head>
 <body>
-<noscript>
+  <noscript>
     <img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=1587272927987010&ev=PageView&noscript=1"/>
   </noscript>
@@ -1249,27 +1349,26 @@ fbq('track', 'PageView');
     </div>
   </div>
 </section>
-
 <section class="section-light">
   <div class="wrap">
     <div class="section-heading">
       <p class="eyebrow eyebrow--lg">Depoimentos</p>
       <div class="divider"></div>
-      <h2 class="display section-title">O que mudou na prática.</h2>
+      <h2 class="display section-title">Resultados reais.</h2>
     </div>
 
     <div class="testimonials-shell">
       <div class="testimonials-track">
         <article class="testimonial">
           <span class="testimonial__pill">Mais constância</span>
-          <p class="testimonial__text">“Eu sempre começava a semana animado e largava tudo no meio. O Protocolo me ajudou a parar de viver no improviso. Hoje minha rotina é simples, mas eu cumpro.”</p>
+          <p class="testimonial__text">“Eu sempre começava a semana animado e largava tudo no meio. O protocolo me ajudou a parar de viver no improviso. Hoje minha rotina é simples, mas eu cumpro.”</p>
           <div class="testimonial__author">Rafael M.</div>
           <div class="testimonial__meta">28 anos · voltou a ter constância</div>
         </article>
 
         <article class="testimonial">
-          <span class="testimonial__pill">Mais direção</span>
-          <p class="testimonial__text">“A aula do Necrológio me pegou de verdade. Eu percebi que estava vivendo no automático. Depois disso, cortei as distrações e comecei a fazer tudo com mais direção.”</p>
+          <span class="testimonial__pill">Mais clareza</span>
+          <p class="testimonial__text">“A aula do Necrológio me pegou de verdade. Eu percebi que estava só empurrando a vida com a barriga. Depois disso, cortei as distrações e comecei a fazer tudo com mais direção.”</p>
           <div class="testimonial__author">Caio T.</div>
           <div class="testimonial__meta">25 anos · reorganizou a própria vida</div>
         </article>
@@ -1283,7 +1382,7 @@ fbq('track', 'PageView');
 
         <article class="testimonial">
           <span class="testimonial__pill">Mais estrutura</span>
-          <p class="testimonial__text">“Eu já tinha comprado curso e largado vários. Nesse aqui eu consegui aplicar. Não é enrolação. É direto e te coloca pra agir.”</p>
+          <p class="testimonial__text">“Eu já tinha comprado curso e largado vários. Nesse aqui eu consegui aplicar. Não é um monte de fala bonita. É direto e te coloca pra agir.”</p>
           <div class="testimonial__author">Bruno L.</div>
           <div class="testimonial__meta">26 anos · saiu da enrolação</div>
         </article>
@@ -1291,14 +1390,13 @@ fbq('track', 'PageView');
     </div>
   </div>
 </section>
-
 <section class="section-soft-dark">
   <div class="wrap">
     <div class="section-heading">
       <p class="eyebrow eyebrow--lg">Pra quem é</p>
       <div class="divider"></div>
       <h2 class="display section-title">Pra quem cansou de se enrolar.</h2>
-      <p class="section-sub">Se você sabe que está ficando para trás e cansou de fingir que depois resolve, é pra você.</p>
+      <p class="section-sub">Se você sabe que está ficando para trás e não quer continuar se enganando, é pra você.</p>
     </div>
 
     <div class="forwho-grid">
@@ -1327,7 +1425,6 @@ fbq('track', 'PageView');
     </div>
   </div>
 </section>
-
 <section class="section-light">
   <div class="wrap">
     <div class="section-heading">
@@ -1358,14 +1455,13 @@ fbq('track', 'PageView');
     </div>
   </div>
 </section>
-
 <section class="section-soft-dark">
   <div class="wrap">
     <div class="section-heading">
       <p class="eyebrow eyebrow--lg">O que você vai construir</p>
       <div class="divider"></div>
-      <h2 class="display section-title">10 aulas. Uma fundação.</h2>
-      <p class="section-sub">Cada aula entrega base concreta — não motivação passageira. Aqui ele entende o que vai aprender e o que muda na prática na vida dele.</p>
+      <h2 class="display section-title">As 10 aulas do protocolo.</h2>
+      <p class="section-sub">O que você vai ver em cada aula e, principalmente, o que isso muda na prática na sua vida.</p>
     </div>
 
     <div class="lessons-grid">
@@ -1471,14 +1567,13 @@ fbq('track', 'PageView');
     </div>
   </div>
 </section>
-
 <section class="section-light">
   <div class="wrap">
     <div class="section-heading">
       <p class="eyebrow eyebrow--lg">Incluso no protocolo</p>
       <div class="divider"></div>
-      <h2 class="display section-title">Mais quatro ferramentas.</h2>
-      <p class="section-sub">Os bônus entram como extensão prática do Protocolo. Não são enfeite. Eles aceleram a aplicação desde o primeiro dia.</p>
+      <h2 class="display section-title">Os 4 bônus.</h2>
+      <p class="section-sub">Os bônus entram pra facilitar a aplicação do Protocolo no dia a dia.</p>
     </div>
 
     <div class="bonus-grid">
@@ -1489,7 +1584,7 @@ fbq('track', 'PageView');
         <div class="bonus-card__content">
           <p class="bonus-card__lbl">Bônus 01</p>
           <div class="bonus-card__title">Guia de Treino em Casa</div>
-          <p class="bonus-card__desc">Um guia simples para você treinar em casa com constância, ganhar força e parar de deixar o treino para depois.</p>
+          <p class="bonus-card__desc">Pra você sair da desculpa e manter o treino mesmo quando não dá pra ir pra academia.</p>
           <p class="bonus-card__val">Valor: R$37</p>
         </div>
       </article>
@@ -1501,7 +1596,7 @@ fbq('track', 'PageView');
         <div class="bonus-card__content">
           <p class="bonus-card__lbl">Bônus 02</p>
           <div class="bonus-card__title">Diário do Homem de Base</div>
-          <p class="bonus-card__desc">Um material para imprimir, organizar a semana e manter sua direção visível no dia a dia.</p>
+          <p class="bonus-card__desc">Pra organizar a cabeça, registrar o que importa e não deixar o protocolo virar só intenção.</p>
           <p class="bonus-card__val">Valor: R$27</p>
         </div>
       </article>
@@ -1513,7 +1608,7 @@ fbq('track', 'PageView');
         <div class="bonus-card__content">
           <p class="bonus-card__lbl">Bônus 03</p>
           <div class="bonus-card__title">Biblioteca Hard Mode</div>
-          <p class="bonus-card__desc">Leituras escolhidas para aprofundar cada pilar sem você se perder em conteúdo aleatório.</p>
+          <p class="bonus-card__desc">Pra estudar com direção e alimentar a mente com coisa que realmente fortalece você.</p>
           <p class="bonus-card__val">Valor: R$17</p>
         </div>
       </article>
@@ -1525,15 +1620,14 @@ fbq('track', 'PageView');
         <div class="bonus-card__content">
           <p class="bonus-card__lbl">Bônus 04</p>
           <div class="bonus-card__title">Checklist de Auditoria Semanal</div>
-          <p class="bonus-card__desc">Uma revisão rápida para corrigir a rota da semana antes de se perder de novo.</p>
+          <p class="bonus-card__desc">Pra revisar a semana, corrigir a rota rápido e não deixar a bagunça acumular.</p>
           <p class="bonus-card__val">Valor: R$17</p>
         </div>
       </article>
     </div>
   </div>
 </section>
-
-<section class="section-dark">
+<section class="section-soft-dark">
   <div class="wrap">
     <div class="story-layout">
       <div>
@@ -1542,12 +1636,10 @@ fbq('track', 'PageView');
         <h2 class="display section-title">Eu vivi isso na prática.</h2>
 
         <p class="body-p" style="margin-top:24px;">
-          Por anos, usei meu próprio conhecimento como escudo. Lia os livros, fazia as listas, entendia os conceitos.
-          <strong>Como se conhecer fosse o mesmo que viver.</strong>
+          Por anos, usei meu próprio conhecimento como escudo. Lia os livros, fazia as listas, entendia os conceitos. Como se conhecer fosse o mesmo que viver.
         </p>
         <p class="body-p">
-          Até que eu tive que admitir uma coisa: o problema nunca foi falta de informação.
-          <strong>Faltava uma identidade sólida o suficiente para continuar quando a motivação acabasse.</strong>
+          Até que eu tive que admitir uma coisa: o problema nunca foi falta de informação. Faltava uma identidade sólida o suficiente para continuar quando a motivação acabasse.
         </p>
         <p class="body-p">
           O Protocolo de Força Prática nasceu dessa virada.
@@ -1563,8 +1655,7 @@ fbq('track', 'PageView');
     </div>
   </div>
 </section>
-
-<section class="section-dark" id="oferta">
+<section class="section-light" id="oferta">
   <div class="wrap">
     <div style="text-align:center; margin-bottom:32px;">
       <p class="eyebrow eyebrow--lg">Sua decisão</p>
@@ -1572,7 +1663,7 @@ fbq('track', 'PageView');
     </div>
 
     <div class="offer-wrap">
-<div class="offer-card">
+      <div class="offer-card">
         <p class="offer-card__product">Protocolo de Força Prática</p>
         <p class="offer-card__includes">10 aulas + 4 bônus · Acesso imediato</p>
 
@@ -1607,15 +1698,14 @@ fbq('track', 'PageView');
       <div class="guarantee">
         <div class="guarantee__icon">🛡</div>
         <div>
-          <div class="guarantee__title">Garantia de 7 Dias — Risco Zero</div>
+          <div class="guarantee__title">Garantia de 7 dias</div>
           <p class="guarantee__text">Acessa o Protocolo. Aplica as primeiras aulas. Se em 7 dias você não sentir que essa é a base que estava faltando, <strong>devolvo 100% do seu dinheiro.</strong></p>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<section class="close section-light">
+<section class="close section-dark">
   <div class="wrap wrap--narrow">
     <h2 class="display close__hl">
       No dia do seu velório,<br>
@@ -1626,7 +1716,7 @@ fbq('track', 'PageView');
       Vão lembrar do homem que você foi<br>
       para as pessoas que dependiam de você.<br>
       A construção começa com uma decisão —<br>
-      <strong style="color:inherit; font-weight:inherit;">e essa decisão é agora.</strong>
+      <span class="close__sub-plain">e essa decisão é agora.</span>
     </p>
     <div class="close__cta">
       <a href="https://pay.hotmart.com/Y103675280S?checkoutMode=10" class="btn btn--ghost">QUERO O PROTOCOLO POR R$67</a>
@@ -1634,13 +1724,12 @@ fbq('track', 'PageView');
     <p class="close__final">Não deixe para amanhã o homem<br>que você precisa ser hoje.</p>
   </div>
 </section>
-
-<section class="section-soft-dark">
+<section class="section-light">
   <div class="wrap wrap--narrow">
     <div class="section-heading">
       <p class="eyebrow eyebrow--lg">Dúvidas frequentes</p>
       <div class="divider"></div>
-      <h2 class="display section-title">Respostas rápidas.</h2>
+      <h2 class="display section-title">Respostas rápidas</h2>
     </div>
 
     <div style="margin-top:30px;">
@@ -1671,7 +1760,6 @@ fbq('track', 'PageView');
     </div>
   </div>
 </section>
-
 <footer>
   <p>© 2026 Hard Mode Inc. · <a href="#">Privacidade</a> · <a href="#">Termos</a> · <a href="#">Suporte</a></p>
   <p style="margin-top:4px;">Resultados individuais podem variar.</p>
@@ -1701,5 +1789,6 @@ fbq('track', 'PageView');
   }, { once: true });
 })();
 </script>
+
 </body>
 </html>
