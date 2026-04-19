@@ -511,13 +511,11 @@ section {
   padding: 2px 2px 8px;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.testimonials-track::-webkit-scrollbar { height: 8px; }
-.testimonials-track::-webkit-scrollbar-thumb {
-  background: rgba(18,18,18,0.16);
-  border-radius: 999px;
-}
+.testimonials-track::-webkit-scrollbar { display: none; }
 
 .testimonials-track::after {
   content: '';
@@ -534,6 +532,27 @@ section {
   min-height: 100%;
 }
 
+.testimonial__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.testimonial__photo {
+  width: 68px;
+  height: 68px;
+  border-radius: 16px;
+  object-fit: cover;
+  object-position: center;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.10);
+}
+
+.testimonial__identity {
+  min-width: 0;
+}
+
 .testimonial__text {
   font-size: 14px;
   line-height: 1.58;
@@ -546,11 +565,12 @@ section {
   font-size: 15px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  line-height: 1.05;
 }
 
 .testimonial__meta {
   font-size: 12px;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 .testimonial__pill {
@@ -916,6 +936,17 @@ section {
   margin-bottom: 6px;
 }
 
+.offer-card__logo {
+  width: min(100%, 300px);
+  margin: 0 auto 10px;
+}
+
+.offer-card__logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .offer-card__includes {
   font-size: 16px;
   color: var(--dim);
@@ -951,7 +982,7 @@ section {
 .offer-stack__total {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 800;
-  font-size: 15px;
+  font-size: 19px;
   text-transform: uppercase;
   color: var(--white) !important;
 }
@@ -959,25 +990,33 @@ section {
 .offer-stack__total span:last-child {
   text-decoration: line-through;
   color: inherit !important;
+  font-size: inherit !important;
 }
 
 .offer-price-block { margin: 20px 0; }
 
-.offer-installments {
-  font-size: 13px;
-  color: var(--dim);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  margin-bottom: 4px;
+.price-anchor--offer {
+  font-size: 17px;
+  margin-bottom: 10px;
 }
 
-.offer-price {
+.offer-installments {
+  font-size: 18px;
+  color: var(--dim);
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+}
+
+.offer-installments--inline strong {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 900;
-  font-size: 60px;
-  color: var(--white);
+  font-size: 38px;
+  color: var(--text-dark);
   line-height: 0.95;
+  margin-left: 6px;
 }
+
+.offer-price { display: none; }
 
 .offer-price__cur {
   font-size: 30px;
@@ -987,13 +1026,27 @@ section {
 }
 
 .offer-price__dec { font-size: 44px; }
-.offer-or { font-size: 14px; color: var(--dim); margin: 7px 0; }
+.offer-or { display: none; }
 
 .offer-cash {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 700;
-  font-size: 20px;
-  color: var(--muted);
+  font-size: 21px;
+  color: var(--text-dark);
+}
+
+.offer-cash--inline {
+  display: block;
+  margin-top: 4px;
+}
+
+.offer-cash--inline .offer-or-inline,
+.offer-cash--inline .offer-cash-suffix {
+  color: var(--text-dark);
+}
+
+.offer-cash--inline strong {
+  color: var(--text-dark);
 }
 
 .offer-cta { margin-top: 24px; }
@@ -1103,9 +1156,13 @@ section {
   text-wrap: balance;
 }
 
+.close__hl .close-line {
+  display: block;
+}
+
 .close__hl em {
   font-style: normal;
-  color: inherit;
+  color: var(--purple-soft);
 }
 
 .close__sub {
@@ -1189,6 +1246,11 @@ footer a { color: #ffffff; text-underline-offset: 3px; }
     padding-bottom: 6px;
   }
 
+  .testimonial__photo {
+    width: 70px;
+    height: 70px;
+  }
+
   .bonus-card__media {
     aspect-ratio: 16 / 6;
   }
@@ -1254,6 +1316,11 @@ footer a { color: #ffffff; text-underline-offset: 3px; }
     grid-auto-columns: unset;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     overflow: visible;
+  }
+
+  .testimonial__photo {
+    width: 74px;
+    height: 74px;
   }
 
   .offer-card { padding: 38px 34px 42px; }
@@ -1323,13 +1390,19 @@ fbq('track', 'PageView');
 
       <div class="hero__video-section">
         <div class="hero__video-glass" id="video-container">
-          <iframe
-            src="https://player.mediadelivery.net/play/636159/7207a3bc-40a9-42f3-86de-cddacef400b7"
-            title="Protocolo de Força Prática"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; web-share"
-            allowfullscreen>
-          </iframe>
+          <button
+            type="button"
+            class="video-poster"
+            id="video-poster"
+            aria-label="Reproduzir vídeo do Protocolo de Força Prática"
+            data-embed="https://www.youtube.com/embed/2RSMdLowagc?autoplay=1&controls=0&rel=0">
+            <img
+              src="https://i.ytimg.com/vi/2RSMdLowagc/maxresdefault.jpg"
+              alt="Vídeo do Protocolo de Força Prática"
+              loading="eager"
+              fetchpriority="high">
+            <span class="video-poster__play" aria-hidden="true"></span>
+          </button>
         </div>
       </div>
 
@@ -1346,39 +1419,57 @@ fbq('track', 'PageView');
 <section class="section-light">
   <div class="wrap">
     <div class="section-heading">
-      <p class="eyebrow eyebrow--lg">Depoimentos</p>
-      <div class="divider"></div>
       <h2 class="display section-title">Resultados reais.</h2>
     </div>
 
     <div class="testimonials-shell">
       <div class="testimonials-track">
         <article class="testimonial">
+          <div class="testimonial__head">
+            <img class="testimonial__photo" src="./assets/img/testimonial-gabriel.png" alt="Gabriel S.">
+            <div class="testimonial__identity">
+              <div class="testimonial__author">Gabriel S.</div>
+              <div class="testimonial__meta">30 anos</div>
+            </div>
+          </div>
           <span class="testimonial__pill">Mais constância</span>
           <p class="testimonial__text">“Eu sempre começava a semana animado e largava tudo no meio. O protocolo me ajudou a parar de viver no improviso. Hoje minha rotina é simples, mas eu cumpro.”</p>
-          <div class="testimonial__author">Rafael M.</div>
-          <div class="testimonial__meta">28 anos · voltou a ter constância</div>
         </article>
 
         <article class="testimonial">
+          <div class="testimonial__head">
+            <img class="testimonial__photo" src="./assets/img/testimonial-julio.png" alt="Júlio César">
+            <div class="testimonial__identity">
+              <div class="testimonial__author">Júlio César</div>
+              <div class="testimonial__meta">29 anos</div>
+            </div>
+          </div>
           <span class="testimonial__pill">Mais clareza</span>
           <p class="testimonial__text">“A aula do Necrológio me pegou de verdade. Eu percebi que estava só empurrando a vida com a barriga. Depois disso, cortei as distrações e comecei a fazer tudo com mais direção.”</p>
-          <div class="testimonial__author">Caio T.</div>
-          <div class="testimonial__meta">25 anos · reorganizou a própria vida</div>
         </article>
 
         <article class="testimonial">
+          <div class="testimonial__head">
+            <img class="testimonial__photo" src="./assets/img/testimonial-rodrigo.png" alt="Rodrigo M.">
+            <div class="testimonial__identity">
+              <div class="testimonial__author">Rodrigo M.</div>
+              <div class="testimonial__meta">32 anos</div>
+            </div>
+          </div>
           <span class="testimonial__pill">Mais respeito próprio</span>
           <p class="testimonial__text">“Não foi só produtividade. Eu voltei a treinar, melhorei meu sono e parei de me prometer coisa que eu não fazia. Isso mudou minha cabeça.”</p>
-          <div class="testimonial__author">João V.</div>
-          <div class="testimonial__meta">27 anos · retomou treino e disciplina</div>
         </article>
 
         <article class="testimonial">
+          <div class="testimonial__head">
+            <img class="testimonial__photo" src="./assets/img/testimonial-daniel.png" alt="Daniel L.">
+            <div class="testimonial__identity">
+              <div class="testimonial__author">Daniel L.</div>
+              <div class="testimonial__meta">31 anos</div>
+            </div>
+          </div>
           <span class="testimonial__pill">Mais estrutura</span>
           <p class="testimonial__text">“Eu já tinha comprado curso e largado vários. Nesse aqui eu consegui aplicar. Não é um monte de fala bonita. É direto e te coloca pra agir.”</p>
-          <div class="testimonial__author">Bruno L.</div>
-          <div class="testimonial__meta">26 anos · saiu da enrolação</div>
         </article>
       </div>
     </div>
@@ -1387,9 +1478,7 @@ fbq('track', 'PageView');
 <section class="section-soft-dark">
   <div class="wrap">
     <div class="section-heading">
-      <p class="eyebrow eyebrow--lg">Pra quem é</p>
-      <div class="divider"></div>
-      <h2 class="display section-title">Pra quem cansou de se enrolar.</h2>
+      <h2 class="display section-title">Pra quem é</h2>
       <p class="section-sub">Se você sabe que está ficando para trás e não quer continuar se enganando, é pra você.</p>
     </div>
 
@@ -1422,8 +1511,6 @@ fbq('track', 'PageView');
 <section class="section-light">
   <div class="wrap">
     <div class="section-heading">
-      <p class="eyebrow eyebrow--lg">A fundação</p>
-      <div class="divider"></div>
       <h2 class="display section-title">Os pilares do protocolo.</h2>
       <p class="section-sub foundation-note">O PFP trabalha os três pilares da Hard Mode ao mesmo tempo, porque não adianta ter força física e continuar perdido por dentro.</p>
     </div>
@@ -1452,8 +1539,6 @@ fbq('track', 'PageView');
 <section class="section-soft-dark">
   <div class="wrap">
     <div class="section-heading">
-      <p class="eyebrow eyebrow--lg">O que você vai construir</p>
-      <div class="divider"></div>
       <h2 class="display section-title">As 10 aulas do protocolo.</h2>
       <p class="section-sub">O que você vai ver em cada aula e, principalmente, o que isso muda na prática na sua vida.</p>
     </div>
@@ -1564,9 +1649,7 @@ fbq('track', 'PageView');
 <section class="section-light">
   <div class="wrap">
     <div class="section-heading">
-      <p class="eyebrow eyebrow--lg">Incluso no protocolo</p>
-      <div class="divider"></div>
-      <h2 class="display section-title">Os 4 bônus.</h2>
+      <h2 class="display section-title">Bônus inclusos no protocolo.</h2>
       <p class="section-sub">Os bônus entram pra facilitar a aplicação do Protocolo no dia a dia.</p>
     </div>
 
@@ -1625,8 +1708,6 @@ fbq('track', 'PageView');
   <div class="wrap">
     <div class="story-layout">
       <div>
-        <p class="eyebrow eyebrow--lg">Quem fala isso</p>
-        <div class="divider"></div>
         <h2 class="display section-title">Eu vivi isso na prática.</h2>
 
         <p class="body-p" style="margin-top:24px;">
@@ -1643,7 +1724,7 @@ fbq('track', 'PageView');
       <div>
         <div class="story-quote">
           <p>"A disciplina não é um fardo — é o pedágio para o seu chamado. Parei de tentar me organizar e comecei a construir quem eu queria ser."</p>
-          <span class="attr">Leonardo Montanholi · Hard Mode Lifestyle</span>
+          <span class="attr">LEONARDO MONTANHOLI,<br>CRIADOR DA HARD MODE LIFESTYLE.</span>
         </div>
       </div>
     </div>
@@ -1658,7 +1739,7 @@ fbq('track', 'PageView');
 
     <div class="offer-wrap">
       <div class="offer-card">
-        <p class="offer-card__product">Protocolo de Força Prática</p>
+        <div class="offer-card__logo"><img src="./assets/img/protocolo-logo.png" alt="Protocolo de Força Prática"></div>
         <p class="offer-card__includes">10 aulas + 4 bônus · Acesso imediato</p>
 
         <ul class="offer-stack">
@@ -1671,11 +1752,9 @@ fbq('track', 'PageView');
         </ul>
 
         <div class="offer-price-block">
-          <p class="price-anchor">De <span>R$147</span> por</p>
-          <p class="offer-installments">9x de</p>
-          <div class="offer-price"><span class="offer-price__cur">R$</span>8<span class="offer-price__dec">,80</span></div>
-          <p class="offer-or">ou</p>
-          <p class="offer-cash"><strong>R$67</strong> à vista</p>
+          <p class="price-anchor price-anchor--offer">DE <span>R$245</span> POR</p>
+          <p class="offer-installments offer-installments--inline">9x de <strong>R$8,80</strong></p>
+          <p class="offer-cash offer-cash--inline"><span class="offer-or-inline">ou</span> <strong>R$67</strong> <span class="offer-cash-suffix">à vista</span></p>
         </div>
 
         <div class="offer-cta">
@@ -1702,9 +1781,9 @@ fbq('track', 'PageView');
 <section class="close section-dark">
   <div class="wrap wrap--narrow">
     <h2 class="display close__hl">
-      No dia do seu velório,<br>
-      ninguém vai lembrar<br>
-      do que você <em>tentou</em> ser.
+      <span class="close-line">NO DIA DO SEU VELÓRIO</span>
+      <span class="close-line">NINGUÉM VAI LEMBRAR</span>
+      <span class="close-line">DO QUE VOCÊ <em>TENTOU</em> SER.</span>
     </h2>
     <p class="close__sub">
       Vão lembrar do homem que você foi<br>
@@ -1721,9 +1800,7 @@ fbq('track', 'PageView');
 <section class="section-light">
   <div class="wrap wrap--narrow">
     <div class="section-heading">
-      <p class="eyebrow eyebrow--lg">Dúvidas frequentes</p>
-      <div class="divider"></div>
-      <h2 class="display section-title">Respostas rápidas</h2>
+      <h2 class="display section-title">Dúvidas frequentes</h2>
     </div>
 
     <div style="margin-top:30px;">
@@ -1759,6 +1836,30 @@ fbq('track', 'PageView');
   <p style="margin-top:4px;">Resultados individuais podem variar.</p>
 </footer>
 
+<script>
+(function () {
+  var poster = document.getElementById('video-poster');
+  var container = document.getElementById('video-container');
+
+  if (!poster || !container) return;
+
+  poster.addEventListener('click', function () {
+    var src = poster.getAttribute('data-embed');
+    if (!src) return;
+
+    var iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.title = 'Protocolo de Força Prática';
+    iframe.loading = 'eager';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+
+    container.innerHTML = '';
+    container.appendChild(iframe);
+  }, { once: true });
+})();
+</script>
 
 </body>
 </html>
