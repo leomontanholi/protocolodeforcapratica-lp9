@@ -1323,19 +1323,13 @@ fbq('track', 'PageView');
 
       <div class="hero__video-section">
         <div class="hero__video-glass" id="video-container">
-          <button
-            type="button"
-            class="video-poster"
-            id="video-poster"
-            aria-label="Reproduzir vídeo do Protocolo de Força Prática"
-            data-embed="https://www.youtube.com/embed/2RSMdLowagc?autoplay=1&controls=0&rel=0">
-            <img
-              src="https://i.ytimg.com/vi/2RSMdLowagc/maxresdefault.jpg"
-              alt="Vídeo do Protocolo de Força Prática"
-              loading="eager"
-              fetchpriority="high">
-            <span class="video-poster__play" aria-hidden="true"></span>
-          </button>
+          <iframe
+            src="https://player.mediadelivery.net/play/636159/7207a3bc-40a9-42f3-86de-cddacef400b7"
+            title="Protocolo de Força Prática"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
         </div>
       </div>
 
@@ -1765,30 +1759,6 @@ fbq('track', 'PageView');
   <p style="margin-top:4px;">Resultados individuais podem variar.</p>
 </footer>
 
-<script>
-(function () {
-  var poster = document.getElementById('video-poster');
-  var container = document.getElementById('video-container');
-
-  if (!poster || !container) return;
-
-  poster.addEventListener('click', function () {
-    var src = poster.getAttribute('data-embed');
-    if (!src) return;
-
-    var iframe = document.createElement('iframe');
-    iframe.src = src;
-    iframe.title = 'Protocolo de Força Prática';
-    iframe.loading = 'eager';
-    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-    iframe.allowFullscreen = true;
-
-    container.innerHTML = '';
-    container.appendChild(iframe);
-  }, { once: true });
-})();
-</script>
 
 </body>
 </html>
