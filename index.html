@@ -1881,14 +1881,30 @@ fbq('track', 'PageView');
   const track = document.querySelector('.testimonials-track');
   if(!track) return;
 
+  let looping = false;
+
+  function getOriginals() {
+    return Array.from(track.children).filter(el => !el.dataset.clone);
+  }
+
+  function cleanupClones() {
+    track.querySelectorAll('[data-clone="true"]').forEach(el => el.remove());
+    track.dataset.loopReady = 'false';
+    delete track.dataset.loopWidth;
+  }
+
   function setupInfiniteTestimonials(){
-    if (window.innerWidth >= 640) return;
+    if (window.innerWidth >= 640) {
+      cleanupClones();
+      return;
+    }
+
     if (track.dataset.loopReady === 'true') return;
 
-    const originals = Array.from(track.children).filter(el => !el.dataset.clone);
+    const originals = getOriginals();
     if (!originals.length) return;
 
-    track.querySelectorAll('[data-clone="true"]').forEach(el => el.remove());
+    cleanupClones();
 
     const fragStart = document.createDocumentFragment();
     const fragEnd = document.createDocumentFragment();
@@ -1906,60 +1922,47 @@ fbq('track', 'PageView');
     track.insertBefore(fragStart, track.firstChild);
     track.appendChild(fragEnd);
 
-    track.dataset.loopReady = 'true';
-
     requestAnimationFrame(() => {
-      const card = track.querySelector('.testimonial');
-      if (!card) return;
+      const firstOriginal = getOriginals()[0];
+      if (!firstOriginal) return;
       const style = getComputedStyle(track);
       const gap = parseFloat(style.columnGap || style.gap || 12);
-      const setWidth = originals.length * (card.getBoundingClientRect().width + gap);
-      track.dataset.loopWidth = String(setWidth);
-      track.scrollLeft = setWidth;
+      const cardWidth = firstOriginal.getBoundingClientRect().width + gap;
+      const loopWidth = originals.length * cardWidth;
+      track.dataset.loopWidth = String(loopWidth);
+      track.dataset.loopReady = 'true';
+      track.scrollLeft = loopWidth;
     });
   }
 
-  function teardownInfiniteTestimonials(){
-    if (track.dataset.loopReady !== 'true') return;
-    track.querySelectorAll('[data-clone="true"]').forEach(el => el.remove());
-    track.dataset.loopReady = 'false';
-    delete track.dataset.loopWidth;
-  }
-
-  let ticking = false;
   track.addEventListener('scroll', () => {
     if (window.innerWidth >= 640) return;
     if (track.dataset.loopReady !== 'true') return;
-    if (ticking) return;
+    if (looping) return;
 
-    ticking = true;
-    requestAnimationFrame(() => {
-      const loopWidth = parseFloat(track.dataset.loopWidth || '0');
-      if (!loopWidth) {
-        ticking = false;
-        return;
-      }
+    const loopWidth = parseFloat(track.dataset.loopWidth || '0');
+    if (!loopWidth) return;
 
-      if (track.scrollLeft <= loopWidth * 0.2) {
-        track.scrollLeft += loopWidth;
-      } else if (track.scrollLeft >= loopWidth * 1.8) {
-        track.scrollLeft -= loopWidth;
-      }
+    const left = track.scrollLeft;
+    const threshold = loopWidth * 0.35;
 
-      ticking = false;
-    });
+    if (left < threshold) {
+      looping = true;
+      track.scrollLeft = left + loopWidth;
+      requestAnimationFrame(() => { looping = false; });
+    } else if (left > loopWidth * 1.65) {
+      looping = true;
+      track.scrollLeft = left - loopWidth;
+      requestAnimationFrame(() => { looping = false; });
+    }
   }, { passive: true });
 
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      if (window.innerWidth >= 640) {
-        teardownInfiniteTestimonials();
-      } else {
-        teardownInfiniteTestimonials();
-        setupInfiniteTestimonials();
-      }
+      cleanupClones();
+      setupInfiniteTestimonials();
     }, 120);
   });
 
