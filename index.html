@@ -502,6 +502,10 @@ section {
   position: relative;
 }
 
+.testimonials-track[data-loop-ready="true"]{
+  scroll-behavior:auto;
+}
+
 .testimonials-track {
   display: grid;
   grid-auto-flow: column;
@@ -513,6 +517,7 @@ section {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  will-change: scroll-position;
 }
 
 .testimonials-track::-webkit-scrollbar { display: none; }
@@ -1420,7 +1425,8 @@ fbq('track', 'PageView');
 <section class="section-light">
   <div class="wrap">
     <div class="section-heading">
-      <h2 class="display section-title">Resultados reais.</h2>
+      <h2 class="display section-title">Resultados reais</h2>
+      <p class="section-sub">Veja os depoimentos de alguns dos nossos alunos.</p>
     </div>
 
     <div class="testimonials-shell">
@@ -1472,6 +1478,43 @@ fbq('track', 'PageView');
           <span class="testimonial__pill">Mais estrutura</span>
           <p class="testimonial__text">“Eu já tinha comprado curso e largado vários. Nesse aqui eu consegui aplicar. Não é um monte de fala bonita. É direto e te coloca pra agir.”</p>
         </article>
+
+
+        <article class="testimonial">
+          <div class="testimonial__head">
+            <img class="testimonial__photo" src="./assets/img/testimonial-igor.png" alt="Igor C.">
+            <div class="testimonial__identity">
+              <div class="testimonial__author">Igor C.</div>
+              <div class="testimonial__meta">33 anos</div>
+            </div>
+          </div>
+          <span class="testimonial__pill">Mais postura</span>
+          <p class="testimonial__text">“Eu tinha conteúdo na cabeça, mas passava imagem de cara perdido. Depois que comecei a aplicar o protocolo, minha postura mudou. Hoje eu me comunico melhor, me imponho mais e não fico mais com cara de quem está sempre em dúvida.”</p>
+        </article>
+
+        <article class="testimonial">
+          <div class="testimonial__head">
+            <img class="testimonial__photo" src="./assets/img/testimonial-joao-vitor.png" alt="João Vitor">
+            <div class="testimonial__identity">
+              <div class="testimonial__author">João Vitor</div>
+              <div class="testimonial__meta">25 anos</div>
+            </div>
+          </div>
+          <span class="testimonial__pill">Menos distração</span>
+          <p class="testimonial__text">“Meu problema era viver no automático: celular, vídeo curto, madrugada bagunçada e zero foco. O protocolo me ajudou a colocar ordem na rotina. Pela primeira vez eu senti que estava no controle da minha vida de novo.”</p>
+        </article>
+
+        <article class="testimonial">
+          <div class="testimonial__head">
+            <img class="testimonial__photo" src="./assets/img/testimonial-gabriele.png" alt="Gabriele A.">
+            <div class="testimonial__identity">
+              <div class="testimonial__author">Gabriele A.</div>
+              <div class="testimonial__meta">27 anos</div>
+            </div>
+          </div>
+          <span class="testimonial__pill">Mais direção</span>
+          <p class="testimonial__text">“O que mais me marcou foi ver que disciplina não é viver no limite, e sim ter direção. O protocolo me ajudou a sair da confusão mental, organizar melhor minha semana e parar de começar um monte de coisa sem terminar nenhuma.”</p>
+        </article>
       </div>
     </div>
   </div>
@@ -1512,7 +1555,7 @@ fbq('track', 'PageView');
 <section class="section-light">
   <div class="wrap">
     <div class="section-heading">
-      <h2 class="display section-title">Os pilares do protocolo.</h2>
+      <h2 class="display section-title">Os pilares do protocolo</h2>
       <p class="section-sub foundation-note">O PFP trabalha os três pilares da Hard Mode ao mesmo tempo, porque não adianta ter força física e continuar perdido por dentro.</p>
     </div>
 
@@ -1540,7 +1583,7 @@ fbq('track', 'PageView');
 <section class="section-soft-dark">
   <div class="wrap">
     <div class="section-heading">
-      <h2 class="display section-title">As 10 aulas do protocolo.</h2>
+      <h2 class="display section-title">As 10 aulas do protocolo</h2>
       <p class="section-sub">O que você vai ver em cada aula e, principalmente, o que isso muda na prática na sua vida.</p>
     </div>
 
@@ -1650,7 +1693,7 @@ fbq('track', 'PageView');
 <section class="section-light">
   <div class="wrap">
     <div class="section-heading">
-      <h2 class="display section-title">Bônus inclusos no protocolo.</h2>
+      <h2 class="display section-title">Bônus inclusos no protocolo</h2>
       <p class="section-sub">Os bônus entram pra facilitar a aplicação do Protocolo no dia a dia.</p>
     </div>
 
@@ -1709,7 +1752,7 @@ fbq('track', 'PageView');
   <div class="wrap">
     <div class="story-layout">
       <div>
-        <h2 class="display section-title">Eu vivi isso na prática.</h2>
+        <h2 class="display section-title">Eu vivi isso na prática</h2>
 
         <p class="body-p" style="margin-top:24px;">
           Por anos, usei meu próprio conhecimento como escudo. Lia os livros, fazia as listas, entendia os conceitos. Como se conhecer fosse o mesmo que viver.
@@ -1733,11 +1776,6 @@ fbq('track', 'PageView');
 </section>
 <section class="section-light" id="oferta">
   <div class="wrap">
-    <div style="text-align:center; margin-bottom:32px;">
-      <p class="eyebrow eyebrow--lg">Sua decisão</p>
-      <div class="divider" style="margin:14px auto 0;"></div>
-    </div>
-
     <div class="offer-wrap">
       <div class="offer-card">
         <div class="offer-card__logo"><img src="./assets/img/protocolo-logo.png" alt="Protocolo de Força Prática"></div>
@@ -1784,7 +1822,7 @@ fbq('track', 'PageView');
     <h2 class="display close__hl">
       <span class="close-line">NO DIA DO SEU VELÓRIO</span>
       <span class="close-line">NINGUÉM VAI LEMBRAR</span>
-      <span class="close-line">DO QUE VOCÊ <em>TENTOU</em> SER.</span>
+      <span class="close-line">DO QUE VOCÊ <em>TENTOU</em> SER</span>
     </h2>
     <p class="close__sub">
       Vão lembrar do homem que você foi<br>
@@ -1836,6 +1874,98 @@ fbq('track', 'PageView');
   <p>© 2026 Hard Mode Inc. · <a href="#">Privacidade</a> · <a href="#">Termos</a> · <a href="#">Suporte</a></p>
   <p style="margin-top:4px;">Resultados individuais podem variar.</p>
 </footer>
+
+
+<script>
+(function(){
+  const track = document.querySelector('.testimonials-track');
+  if(!track) return;
+
+  function setupInfiniteTestimonials(){
+    if (window.innerWidth >= 640) return;
+    if (track.dataset.loopReady === 'true') return;
+
+    const originals = Array.from(track.children).filter(el => !el.dataset.clone);
+    if (!originals.length) return;
+
+    track.querySelectorAll('[data-clone="true"]').forEach(el => el.remove());
+
+    const fragStart = document.createDocumentFragment();
+    const fragEnd = document.createDocumentFragment();
+
+    originals.forEach(card => {
+      const before = card.cloneNode(true);
+      before.dataset.clone = 'true';
+      fragStart.appendChild(before);
+
+      const after = card.cloneNode(true);
+      after.dataset.clone = 'true';
+      fragEnd.appendChild(after);
+    });
+
+    track.insertBefore(fragStart, track.firstChild);
+    track.appendChild(fragEnd);
+
+    track.dataset.loopReady = 'true';
+
+    requestAnimationFrame(() => {
+      const card = track.querySelector('.testimonial');
+      if (!card) return;
+      const style = getComputedStyle(track);
+      const gap = parseFloat(style.columnGap || style.gap || 12);
+      const setWidth = originals.length * (card.getBoundingClientRect().width + gap);
+      track.dataset.loopWidth = String(setWidth);
+      track.scrollLeft = setWidth;
+    });
+  }
+
+  function teardownInfiniteTestimonials(){
+    if (track.dataset.loopReady !== 'true') return;
+    track.querySelectorAll('[data-clone="true"]').forEach(el => el.remove());
+    track.dataset.loopReady = 'false';
+    delete track.dataset.loopWidth;
+  }
+
+  let ticking = false;
+  track.addEventListener('scroll', () => {
+    if (window.innerWidth >= 640) return;
+    if (track.dataset.loopReady !== 'true') return;
+    if (ticking) return;
+
+    ticking = true;
+    requestAnimationFrame(() => {
+      const loopWidth = parseFloat(track.dataset.loopWidth || '0');
+      if (!loopWidth) {
+        ticking = false;
+        return;
+      }
+
+      if (track.scrollLeft <= loopWidth * 0.2) {
+        track.scrollLeft += loopWidth;
+      } else if (track.scrollLeft >= loopWidth * 1.8) {
+        track.scrollLeft -= loopWidth;
+      }
+
+      ticking = false;
+    });
+  }, { passive: true });
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (window.innerWidth >= 640) {
+        teardownInfiniteTestimonials();
+      } else {
+        teardownInfiniteTestimonials();
+        setupInfiniteTestimonials();
+      }
+    }, 120);
+  });
+
+  window.addEventListener('load', setupInfiniteTestimonials);
+})();
+</script>
 
 </body>
 </html>
