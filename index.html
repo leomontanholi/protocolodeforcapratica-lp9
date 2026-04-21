@@ -436,6 +436,7 @@ section {
 
 .video-poster {
   position: relative;
+  display: block;
   width: 100%;
   height: 100%;
   min-height: 100%;
@@ -443,6 +444,8 @@ section {
   padding: 0;
   background: #09090f;
   cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .video-poster img {
@@ -465,8 +468,8 @@ section {
   width: 76px;
   height: 76px;
   border-radius: 50%;
-  background: rgba(6,6,12,0.74);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: #5e17eb;
+  border: 1px solid rgba(255,255,255,0.18);
   display: grid;
   place-items: center;
   z-index: 2;
@@ -1398,14 +1401,35 @@ footer a { color: #ffffff; text-underline-offset: 3px; }
       </p>
 
       <div class="hero__video-section">
-        <div class="hero__video-glass" id="video-container">
-          <iframe
-            src="https://player.mediadelivery.net/play/636159/7207a3bc-40a9-42f3-86de-cddacef400b7"
-            title="Protocolo de Força Prática"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; web-share"
-            allowfullscreen>
-          </iframe>
+        <div
+          class="hero__video-glass"
+          id="video-container"
+          data-embed-url="https://player.mediadelivery.net/embed/636159/7207a3bc-40a9-42f3-86de-cddacef400b7?autoplay=true&preload=false"
+        >
+          <button
+            type="button"
+            class="video-poster"
+            id="video-poster"
+            aria-label="Reproduzir vídeo de apresentação"
+          >
+            <img
+              src="https://vz-6ae640ea-a42.b-cdn.net/7207a3bc-40a9-42f3-86de-cddacef400b7/thumbnail.jpg"
+              alt="Capa do vídeo Protocolo de Força Prática"
+              loading="eager"
+              fetchpriority="high"
+            >
+            <span class="video-poster__play" aria-hidden="true"></span>
+          </button>
+
+          <noscript>
+            <iframe
+              src="https://player.mediadelivery.net/embed/636159/7207a3bc-40a9-42f3-86de-cddacef400b7?autoplay=false&preload=false"
+              title="Protocolo de Força Prática"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; web-share"
+              allowfullscreen>
+            </iframe>
+          </noscript>
         </div>
       </div>
 
@@ -2000,6 +2024,35 @@ footer a { color: #ffffff; text-underline-offset: 3px; }
   });
 
   window.addEventListener('load', setupInfiniteTestimonials);
+})();
+</script>
+
+
+<script>
+(function () {
+  const container = document.getElementById('video-container');
+  const poster = document.getElementById('video-poster');
+
+  if (!container || !poster) return;
+
+  let loaded = false;
+
+  function loadVideo() {
+    if (loaded) return;
+    loaded = true;
+
+    const iframe = document.createElement('iframe');
+    iframe.src = container.dataset.embedUrl;
+    iframe.title = 'Protocolo de Força Prática';
+    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+    iframe.allow = 'accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+
+    container.innerHTML = '';
+    container.appendChild(iframe);
+  }
+
+  poster.addEventListener('click', loadVideo, { once: true });
 })();
 </script>
 
