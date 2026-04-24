@@ -429,13 +429,32 @@ section {
   border: 1px solid var(--border);
   overflow: hidden;
   position: relative;
+  isolation: isolate;
   aspect-ratio: 16 / 9;
-  background: rgba(0,0,0,0.35);
+  background: #09090f;
   box-shadow: var(--shadow-md);
 }
 
+.hero__video-host {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #09090f;
+}
+
+.hero__video-host iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
 .video-poster {
-  position: relative;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
   display: block;
   width: 100%;
   height: 100%;
@@ -446,6 +465,7 @@ section {
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
 }
 
 .video-poster img {
@@ -461,6 +481,16 @@ section {
   background: linear-gradient(180deg, rgba(6,6,12,0.08), rgba(6,6,12,0.24));
 }
 
+.video-poster.is-loading {
+  cursor: default;
+}
+
+.video-poster.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
 .video-poster__play {
   position: absolute;
   inset: 50% auto auto 50%;
@@ -474,6 +504,12 @@ section {
   place-items: center;
   z-index: 2;
   box-shadow: 0 16px 36px rgba(0,0,0,0.22);
+  transition: opacity 0.2s ease;
+}
+
+.video-poster.is-loading .video-poster__play,
+.video-poster.is-hidden .video-poster__play {
+  opacity: 0;
 }
 
 .video-poster__play::before {
@@ -484,14 +520,6 @@ section {
   border-top: 12px solid transparent;
   border-bottom: 12px solid transparent;
   border-left: 20px solid var(--white);
-}
-
-.hero__video-glass iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
 }
 
 .hero__cta {
@@ -1401,11 +1429,9 @@ footer a { color: #ffffff; text-underline-offset: 3px; }
       </p>
 
       <div class="hero__video-section">
-        <div
-          class="hero__video-glass"
-          id="video-container"
-          data-embed-url="https://player.mediadelivery.net/embed/636159/7207a3bc-40a9-42f3-86de-cddacef400b7?autoplay=true&preload=false"
-        >
+        <div class="hero__video-glass">
+          <div class="hero__video-host" id="hero-video-host" aria-hidden="true"></div>
+
           <button
             type="button"
             class="video-poster"
@@ -1413,20 +1439,21 @@ footer a { color: #ffffff; text-underline-offset: 3px; }
             aria-label="Reproduzir vídeo de apresentação"
           >
             <img
-              src="https://vz-6ae640ea-a42.b-cdn.net/7207a3bc-40a9-42f3-86de-cddacef400b7/thumbnail.jpg"
+              src="https://i.ytimg.com/vi/2RSMdLowagc/maxresdefault.jpg"
               alt="Capa do vídeo Protocolo de Força Prática"
               loading="eager"
               fetchpriority="high"
+              onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/2RSMdLowagc/hqdefault.jpg';"
             >
             <span class="video-poster__play" aria-hidden="true"></span>
           </button>
 
           <noscript>
             <iframe
-              src="https://player.mediadelivery.net/embed/636159/7207a3bc-40a9-42f3-86de-cddacef400b7?autoplay=false&preload=false"
+              src="https://www.youtube.com/embed/2RSMdLowagc?controls=0&rel=0&modestbranding=1&playsinline=1"
               title="Protocolo de Força Prática"
               referrerpolicy="strict-origin-when-cross-origin"
-              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; web-share"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen>
             </iframe>
           </noscript>
@@ -2030,29 +2057,36 @@ footer a { color: #ffffff; text-underline-offset: 3px; }
 
 <script>
 (function () {
-  const container = document.getElementById('video-container');
   const poster = document.getElementById('video-poster');
+  const host = document.getElementById('hero-video-host');
 
-  if (!container || !poster) return;
+  if (!poster || !host) return;
 
-  let loaded = false;
+  let started = false;
 
-  function loadVideo() {
-    if (loaded) return;
-    loaded = true;
+  poster.addEventListener('click', function () {
+    if (started) return;
+    started = true;
+
+    poster.disabled = true;
+    poster.classList.add('is-loading');
 
     const iframe = document.createElement('iframe');
-    iframe.src = container.dataset.embedUrl;
+    iframe.src = 'https://www.youtube.com/embed/2RSMdLowagc?autoplay=1&controls=0&rel=0&modestbranding=1&playsinline=1';
     iframe.title = 'Protocolo de Força Prática';
     iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-    iframe.allow = 'accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; web-share';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
     iframe.allowFullscreen = true;
+    iframe.setAttribute('allowfullscreen', '');
 
-    container.innerHTML = '';
-    container.appendChild(iframe);
-  }
+    iframe.addEventListener('load', function () {
+      setTimeout(function () {
+        poster.classList.add('is-hidden');
+      }, 320);
+    }, { once: true });
 
-  poster.addEventListener('click', loadVideo, { once: true });
+    host.appendChild(iframe);
+  }, { once: true });
 })();
 </script>
 
